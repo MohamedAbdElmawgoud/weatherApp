@@ -1,44 +1,48 @@
-const path = require('path')
 const express = require('express')
+const path = require('path')
 const hbs = require('hbs')
+const request = require('request')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.port || 3000
 
-// Define paths for Express config
+// define path  for express config
 const publicDirectoryPath = path.join(__dirname, '../public')
-const viewsPath = path.join(__dirname, '../templates/views')
-const partialsPath = path.join(__dirname, '../templates/partials')
+const viewsPath = path.join(__dirname, '../templetes/views')
+const partialsPath = path.join(__dirname, '../templetes/partials')
 
-// Setup handlebars engine and views location
+
+// setup handlebars engine and view location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
-// Setup static directory to serve
+
+// setup static directory 
 app.use(express.static(publicDirectoryPath))
+
 
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather',
-        name: 'Andrew Mead'
+        name: 'goda'
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About Me',
-        name: 'Andrew Mead'
+        name: 'Goda'
     })
 })
 
 app.get('/help', (req, res) => {
     res.render('help', {
         helpText: 'This is some helpful text.',
-        title: 'Help',
-        name: 'Andrew Mead'
+        title: 'help desk',
+        name: 'Goda'
     })
 })
 
@@ -48,7 +52,6 @@ app.get('/weather', (req, res) => {
             error: 'You must provide an address!'
         })
     }
-
     geocode(req.query.address, (error, { latitude, longitude, location } = {}) => {
         if (error) {
             return res.send({ error })
@@ -68,18 +71,15 @@ app.get('/weather', (req, res) => {
     })
 })
 
-app.get('/products', (req, res) => {
-    if (!req.query.search) {
-        return res.send({
-            error: 'You must provide a search term'
-        })
-    }
 
-    console.log(req.query.search)
+app.get('/products', (req, res) => {
+    console.log(req.query)
     res.send({
         products: []
     })
+
 })
+
 
 app.get('/help/*', (req, res) => {
     res.render('404', {
@@ -89,6 +89,10 @@ app.get('/help/*', (req, res) => {
     })
 })
 
+
+
+
+
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404',
@@ -97,6 +101,8 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(port, () => {
-    console.log('Server is up on port ' + port)
-})
+
+
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
