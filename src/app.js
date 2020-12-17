@@ -91,7 +91,9 @@ app.get('/help/*', (req, res) => {
 })
 
 
-
+app.get('/', function(req, res){
+    res.redirect('/weather');
+ });
 
 
 app.get('*', (req, res) => {
