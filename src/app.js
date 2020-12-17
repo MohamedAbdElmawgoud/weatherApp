@@ -17,6 +17,7 @@ const partialsPath = path.join(__dirname, '../templetes/partials')
 // setup handlebars engine and view location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
+app.set('port' ,port)
 hbs.registerPartials(partialsPath)
 
 
@@ -24,12 +25,12 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirectoryPath))
 
 
-// app.get('', (req, res) => {
-//     res.render('index', {
-//         title: 'Weather',
-//         name: 'goda'
-//     })
-// })
+app.get('', (req, res) => {
+    res.render('index', {
+        title: 'Weather',
+        name: 'goda'
+    })
+})
 
 app.get('/about', (req, res) => {
     res.render('about', {
