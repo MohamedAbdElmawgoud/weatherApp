@@ -15,6 +15,7 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 // Setup handlebars engine and views location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
+app.set('PORT' ,port)
 hbs.registerPartials(partialsPath)
 
 // Setup static directory to serve
