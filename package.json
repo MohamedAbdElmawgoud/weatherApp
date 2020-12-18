@@ -4,7 +4,7 @@
   "description": "weater application",
   "main": "index.js",
   "scripts": {
-    "start": "npm i && nodemon src/app.js"
+    "start": "npm i request&& node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -16,8 +16,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "hbs": "^4.1.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "request": "^2.88.2"
   }
-  
 }
-
